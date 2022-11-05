@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'ui/shared/app_drawer.dart';
+import 'ui/books/book_grid_screen.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({
@@ -20,6 +21,7 @@ class HomePage extends StatelessWidget {
         ],
       ),
       drawer: const AppDrawer(),
+      body: const BookGridScreen(),
     );
   }
 

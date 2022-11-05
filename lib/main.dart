@@ -44,7 +44,7 @@ class _ComicsAppState extends State<ComicsApp> {
         body: _pages[_selectedIndex],
         bottomNavigationBar: BottomNavigationBar(
           selectedItemColor: Colors.white,
-          selectedFontSize: 12,
+          selectedFontSize: 14,
           iconSize: 20,
           items: const [
             BottomNavigationBarItem(
@@ -72,6 +72,19 @@ class _ComicsAppState extends State<ComicsApp> {
           onTap: _onItemTapped,
         ),
       ),
+      routes: const {},
+      onGenerateRoute: (settings) {
+        if (settings.name == BookDetailScreen.routeName) {
+          final bookId = settings.arguments as String;
+          return MaterialPageRoute(
+            builder: (contx) {
+              return BookDetailScreen(
+                BookManager().findById(bookId),
+              );
+            },
+          );
+        }
+      },
     );
   }
 }
