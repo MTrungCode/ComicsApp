@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screen.dart';
-
+import 'ui/cart/Cart_Screen.dart';
 void main() {
   runApp(const ComicsApp());
 }
@@ -20,12 +20,8 @@ class _ComicsAppState extends State<ComicsApp> {
     Container(
       color: Colors.redAccent,
     ),
-    Container(
-      color: Colors.greenAccent,
-    ),
-    Container(
-      color: Colors.deepPurpleAccent,
-    ),
+    const EditBookScreen(),
+    const CartScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -72,7 +68,9 @@ class _ComicsAppState extends State<ComicsApp> {
           onTap: _onItemTapped,
         ),
       ),
-      routes: const {},
+      routes: {
+        EditBookScreen.routeName: (context) => EditBookScreen(),
+      },
       onGenerateRoute: (settings) {
         if (settings.name == BookDetailScreen.routeName) {
           final bookId = settings.arguments as String;
@@ -84,6 +82,7 @@ class _ComicsAppState extends State<ComicsApp> {
             },
           );
         }
+        return null;
       },
     );
   }
