@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../search_box.dart';
 
 class AppDrawer extends StatefulWidget {
   const AppDrawer({Key? key}) : super(key: key);
@@ -24,6 +25,12 @@ class _AppDrawerState extends State<AppDrawer> {
                 hintText: 'Tìm truyện ...',
                 border: OutlineInputBorder(),
               ),
+              onTap: () {
+                showSearch(
+                  context: context,
+                  delegate: SearchBox(),
+                );
+              },
             ),
           ),
           ListTile(

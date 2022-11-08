@@ -19,7 +19,7 @@ class _BookGridScreenState extends State<BookGridScreen> {
       padding: const EdgeInsets.all(10.0),
       itemCount: booksManager.itemCount,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
+        crossAxisCount: 1,
         childAspectRatio: 2 / 2,
         crossAxisSpacing: 15,
         mainAxisSpacing: 15,

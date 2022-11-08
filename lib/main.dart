@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screen.dart';
-import 'ui/cart/Cart_Screen.dart';
+
 void main() {
   runApp(const ComicsApp());
 }
@@ -17,9 +17,7 @@ class _ComicsAppState extends State<ComicsApp> {
 
   static final List<Widget> _pages = <Widget>[
     const HomePage(),
-    Container(
-      color: Colors.redAccent,
-    ),
+    const FavoriteGridScreen(),
     const EditBookScreen(),
     const CartScreen(),
   ];
@@ -69,7 +67,7 @@ class _ComicsAppState extends State<ComicsApp> {
         ),
       ),
       routes: {
-        EditBookScreen.routeName: (context) => EditBookScreen(),
+        EditBookScreen.routeName: (context) => const EditBookScreen(),
       },
       onGenerateRoute: (settings) {
         if (settings.name == BookDetailScreen.routeName) {

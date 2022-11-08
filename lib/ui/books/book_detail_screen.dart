@@ -20,35 +20,32 @@ class BookDetailScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
+            const SizedBox(height: 10),
             SizedBox(
               height: 300,
               width: double.infinity,
               child: Image.network(
                 book.imageUrl,
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
               ),
             ),
             const SizedBox(height: 10),
             Text(
               'Tên: ${book.title}',
               style: const TextStyle(fontSize: 14),
-              textAlign: TextAlign.start,
             ),
             Text(
               'Thê loại: ${book.type}',
               style: const TextStyle(fontSize: 14),
-              textAlign: TextAlign.start,
             ),
             Text(
               'Nội dung: ${book.description}',
               softWrap: true,
               style: const TextStyle(fontSize: 14),
-              textAlign: TextAlign.start,
             ),
             Text(
               'Giá bán: ${book.price} đ',
               style: const TextStyle(fontSize: 14),
-              textAlign: TextAlign.left,
             ),
             const SizedBox(height: 10),
             Container(

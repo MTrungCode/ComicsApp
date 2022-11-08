@@ -23,7 +23,7 @@ class BookGridTile extends StatelessWidget {
           },
           child: Image.network(
             book.imageUrl,
-            fit: BoxFit.cover,
+            fit: BoxFit.fitHeight,
           ),
         ),
       ),
@@ -33,21 +33,28 @@ class BookGridTile extends StatelessWidget {
   Widget buildFooterButton(BuildContext context) {
     return GridTileBar(
       backgroundColor: Colors.blueGrey,
-      leading: IconButton(
-        icon: const Icon(Icons.add_shopping_cart),
-        onPressed: () {
-          print('Added to shopping cart');
+      trailing: ValueListenableBuilder<bool>(
+        valueListenable: book.isFavoriteListenable,
+        builder: (context, isFavorite, child) {
+          return IconButton(
+            icon: Icon(
+              isFavorite ? Icons.favorite : Icons.favorite_border,
+            ),
+            onPressed: () {
+              book.isFavorite = !isFavorite;
+            },
+          );
         },
       ),
       title: Text(
         book.title,
         textAlign: TextAlign.center,
       ),
-      trailing: IconButton(
+      leading: IconButton(
         onPressed: () {
-          print('favorite ticked');
+          print('Added to shopping cart');
         },
-        icon: Icon(book.isFavorite ? Icons.favorite : Icons.favorite_border),
+        icon: const Icon(Icons.add_shopping_cart),
         color: Theme.of(context).colorScheme.surface,
       ),
     );

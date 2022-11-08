@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class Book {
   final String? id;
   final String title;
@@ -5,7 +7,7 @@ class Book {
   final String description;
   final double price;
   final String imageUrl;
-  final bool isFavorite;
+  final ValueNotifier<bool> _isFavorite;
 
   Book({
     this.id,
@@ -14,8 +16,20 @@ class Book {
     required this.description,
     required this.price,
     required this.imageUrl,
-    this.isFavorite = false,
-  });
+    isFavorite = false,
+  }) : _isFavorite = ValueNotifier(isFavorite);
+
+  set isFavorite(bool newValue) {
+    _isFavorite.value = newValue;
+  }
+
+  bool get isFavorite {
+    return _isFavorite.value;
+  }
+
+  ValueNotifier<bool> get isFavoriteListenable {
+    return _isFavorite;
+  }
 
   Book copyWith({
     String? id,

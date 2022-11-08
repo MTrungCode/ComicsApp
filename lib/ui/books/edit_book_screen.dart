@@ -4,7 +4,7 @@ import 'book_manager.dart';
 
 class EditBookScreen extends StatelessWidget {
   const EditBookScreen({super.key});
-static const routeName = '/edit-book';
+  static const routeName = '/edit-book';
   @override
   Widget build(BuildContext context) {
     final booksManager = BookManager();
@@ -23,10 +23,9 @@ static const routeName = '/edit-book';
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         backgroundColor: Colors.lightBlue,
-        child: const Icon(Icons.add),
         tooltip: "Thêm sách",
+        child: const Icon(Icons.add),
       ),
-    
     );
   }
 
