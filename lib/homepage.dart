@@ -1,7 +1,6 @@
-import 'package:comicsapp/screen.dart';
 import 'package:flutter/material.dart';
 import 'ui/shared/app_drawer.dart';
-import 'ui/books/book_grid_screen.dart';
+import 'screen.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({
@@ -39,7 +38,7 @@ class HomePage extends StatelessWidget {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => CartScreen()),
+          MaterialPageRoute(builder: (context) => const CartScreen()),
         );
       },
     );

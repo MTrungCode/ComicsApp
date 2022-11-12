@@ -1,5 +1,4 @@
-
-import '../../models/CartBook.dart';
+import '../../models/cartBook.dart';
 
 class CartManager {
   final Map<String, CartBook> _iteams = {
@@ -18,12 +17,13 @@ class CartManager {
   }
 
   List<CartBook> get books {
-    return _iteams.values.toList(); 
+    return _iteams.values.toList();
   }
 
   Iterable<MapEntry<String, CartBook>> get bookEntries {
-    return  {..._iteams}.entries;
+    return {..._iteams}.entries;
   }
+
   double get totalAmount {
     var total = 0.0;
     _iteams.forEach((key, value) {

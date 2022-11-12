@@ -4,6 +4,7 @@ import 'ui/books/book_manager.dart';
 import 'ui/books/book_detail_screen.dart';
 
 class SearchBox extends SearchDelegate {
+  static const routeName = '/search-box';
   List<Book> books = BookManager().books;
 
   @override

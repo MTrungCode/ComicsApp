@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../models/book.dart';
 import 'book_detail_screen.dart';
+import 'book_manager.dart';
 
 class BookGridTile extends StatelessWidget {
   const BookGridTile(this.book, {super.key});
@@ -41,7 +43,7 @@ class BookGridTile extends StatelessWidget {
               isFavorite ? Icons.favorite : Icons.favorite_border,
             ),
             onPressed: () {
-              book.isFavorite = !isFavorite;
+              context.read<BookManager>().favoriteStatus(book);
             },
           );
         },

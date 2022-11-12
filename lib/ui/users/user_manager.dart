@@ -8,7 +8,8 @@ class UserManager {
       sex: 'male',
       birthday: "1/1/2001",
       address: "Kan Thor",
-      imageUrl: 'https://toigingiuvedep.vn/wp-content/uploads/2021/05/hinh-anh-avatar-nam-dep-trai-lanh-lung.jpg',
+      imageUrl:
+          'https://toigingiuvedep.vn/wp-content/uploads/2021/05/hinh-anh-avatar-nam-dep-trai-lanh-lung.jpg',
     ),
     User(
       id: 'u2',
@@ -16,7 +17,8 @@ class UserManager {
       sex: 'female',
       birthday: "13/2/2001",
       address: "Kan Thor",
-      imageUrl: 'https://demoda.vn/wp-content/uploads/2022/03/anh-avatar-nu-mu-den.jpg',
+      imageUrl:
+          'https://demoda.vn/wp-content/uploads/2022/03/anh-avatar-nu-mu-den.jpg',
     ),
   ];
 
@@ -24,16 +26,16 @@ class UserManager {
     return _users.length;
   }
 
-  List<User> get Users {
+  List<User> get users {
     return [..._users];
   }
-  
-  List<User> get Male {
-    return _users.where((UserItem) => UserItem == 'male').toList();
+
+  List<User> get male {
+    return _users.where((userItem) => userItem.sex == 'male').toList();
   }
 
-    List<User> get Female {
-    return _users.where((UserItem) => UserItem == 'female').toList();
+  List<User> get female {
+    return _users.where((userItem) => userItem.sex == 'female').toList();
   }
 
   User findById(String id) {

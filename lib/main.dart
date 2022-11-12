@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'screen.dart';
 
 void main() {
@@ -17,7 +18,7 @@ class _ComicsAppState extends State<ComicsApp> {
 
   static final List<Widget> _pages = <Widget>[
     const HomePage(),
-    const FavoriteGridScreen(),
+    const FavoriteListScreen(),
     const EditBookScreen(),
     // const CartScreen(),
     const UserScreen()
@@ -32,57 +33,64 @@ class _ComicsAppState extends State<ComicsApp> {
   @override
   Widget build(BuildContext context) {
     final theme = ComicsAppTheme.light();
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: theme,
-      home: Scaffold(
-        body: _pages[_selectedIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Colors.white,
-          selectedFontSize: 14,
-          iconSize: 20,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Trang chủ',
-              backgroundColor: Colors.blueGrey,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.favorite),
-              label: 'Yêu thích',
-              backgroundColor: Colors.redAccent,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.card_travel),
-              label: 'Đơn hàng',
-              backgroundColor: Colors.blueAccent,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.file_present),
-              label: 'Hồ sơ của tôi',
-              backgroundColor: Colors.deepPurpleAccent,
-            ),
-          ],
-          currentIndex: _selectedIndex,
-          onTap: _onItemTapped,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => BookManager(),
+        )
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: theme,
+        home: Scaffold(
+          body: _pages[_selectedIndex],
+          bottomNavigationBar: BottomNavigationBar(
+            selectedItemColor: Colors.white,
+            selectedFontSize: 14,
+            iconSize: 20,
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Trang chủ',
+                backgroundColor: Colors.blueGrey,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.favorite),
+                label: 'Yêu thích',
+                backgroundColor: Colors.redAccent,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.card_travel),
+                label: 'Đơn hàng',
+                backgroundColor: Colors.blueAccent,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.file_present),
+                label: 'Hồ sơ của tôi',
+                backgroundColor: Colors.deepPurpleAccent,
+              ),
+            ],
+            currentIndex: _selectedIndex,
+            onTap: _onItemTapped,
+          ),
         ),
+        routes: {
+          EditBookScreen.routeName: (context) => const EditBookScreen(),
+        },
+        onGenerateRoute: (settings) {
+          if (settings.name == BookDetailScreen.routeName) {
+            final bookId = settings.arguments as String;
+            return MaterialPageRoute(
+              builder: (contx) {
+                return BookDetailScreen(
+                  contx.read<BookManager>().findById(bookId),
+                );
+              },
+            );
+          }
+          return null;
+        },
       ),
-      routes: {
-        EditBookScreen.routeName: (context) => const EditBookScreen(),
-      },
-      onGenerateRoute: (settings) {
-        if (settings.name == BookDetailScreen.routeName) {
-          final bookId = settings.arguments as String;
-          return MaterialPageRoute(
-            builder: (contx) {
-              return BookDetailScreen(
-                BookManager().findById(bookId),
-              );
-            },
-          );
-        }
-        return null;
-      },
     );
   }
 }

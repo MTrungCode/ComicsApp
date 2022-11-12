@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
+
 import '../../models/book.dart';
 
-class BookManager {
+class BookManager with ChangeNotifier {
   final List<Book> _items = [
     Book(
       id: 'b1',
@@ -80,5 +82,10 @@ class BookManager {
 
   Book findById(String id) {
     return _items.firstWhere((bok) => bok.id == id);
+  }
+
+  void favoriteStatus(Book book) {
+    final saveStatus = book.isFavorite;
+    book.isFavorite = !saveStatus;
   }
 }

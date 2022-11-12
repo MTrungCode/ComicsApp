@@ -12,12 +12,11 @@ class UserCard extends StatelessWidget {
     required this.userName,
     required this.position,
     this.imageProvider,
-  }) :super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      
       padding: const EdgeInsets.all(18),
       child: Row(
         children: [

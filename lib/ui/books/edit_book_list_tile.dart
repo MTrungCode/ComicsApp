@@ -5,9 +5,8 @@ class EditBookListTile extends StatelessWidget {
   final Book book;
   const EditBookListTile(
     this.book, {
-      super.key,
-    }
-  );
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +37,8 @@ class EditBookListTile extends StatelessWidget {
 
   Widget buildDeleteButton(BuildContext context) {
     return IconButton(
-      onPressed: () {},
-      icon: Icon(Icons.delete),
-      color: Theme.of(context).errorColor
-    );
+        onPressed: () {},
+        icon: const Icon(Icons.delete),
+        color: Theme.of(context).errorColor);
   }
-
 }

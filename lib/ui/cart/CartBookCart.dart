@@ -1,14 +1,12 @@
-import 'package:comicsapp/ui/cart/CartManager.dart';
+// import 'package:comicsapp/ui/cart/CartManager.dart';
 import 'package:flutter/material.dart';
 
-import '../../models/CartBook.dart';
-import '../shared/dialog_utils.dart';
+import '../../models/cartBook.dart';
+// import '../shared/dialog_utils.dart';
 
 class CartBookCart extends StatelessWidget {
   final String bookId;
   final CartBook cardBook;
-
- 
 
   const CartBookCart({
     required this.bookId,
@@ -40,6 +38,7 @@ class CartBookCart extends StatelessWidget {
       child: buildBookCart(),
     );
   }
+
   Widget buildBookCart() {
     return Card(
       margin: const EdgeInsets.symmetric(

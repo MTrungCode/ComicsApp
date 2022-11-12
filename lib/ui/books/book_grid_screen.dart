@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../models/book.dart';
 import 'book_grid_tile.dart';
 import 'book_manager.dart';
 
@@ -14,7 +16,9 @@ class _BookGridScreenState extends State<BookGridScreen> {
   @override
   Widget build(BuildContext context) {
     final booksManager = BookManager();
-    final books = booksManager.books;
+    final books = context.select<BookManager, List<Book>>(
+      (booksManager) => booksManager.books,
+    );
     return GridView.builder(
       padding: const EdgeInsets.all(10.0),
       itemCount: booksManager.itemCount,
