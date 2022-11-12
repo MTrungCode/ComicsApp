@@ -19,7 +19,8 @@ class _ComicsAppState extends State<ComicsApp> {
     const HomePage(),
     const FavoriteGridScreen(),
     const EditBookScreen(),
-    const CartScreen(),
+    // const CartScreen(),
+    const UserScreen()
   ];
 
   void _onItemTapped(int index) {

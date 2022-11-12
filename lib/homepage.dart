@@ -1,3 +1,4 @@
+import 'package:comicsapp/screen.dart';
 import 'package:flutter/material.dart';
 import 'ui/shared/app_drawer.dart';
 import 'ui/books/book_grid_screen.dart';
@@ -16,7 +17,7 @@ class HomePage extends StatelessWidget {
           style: Theme.of(context).textTheme.headline2,
         ),
         actions: [
-          buildShoppingCart(),
+          buildShoppingCart(context),
           buildNotificationButton(),
         ],
       ),
@@ -32,10 +33,15 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget buildShoppingCart() {
+  Widget buildShoppingCart(BuildContext context) {
     return IconButton(
       icon: const Icon(Icons.shopping_cart),
-      onPressed: () {},
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => CartScreen()),
+        );
+      },
     );
   }
 }

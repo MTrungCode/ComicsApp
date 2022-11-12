@@ -11,3 +11,5 @@ export 'ui/cart/CartManager.dart';
 export 'ui/cart/Cart_Screen.dart';
 
 export 'ui/favorites/favorite_grid_screen.dart';
+
+export 'ui/users/user_screen.dart';
