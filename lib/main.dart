@@ -19,8 +19,9 @@ class _ComicsAppState extends State<ComicsApp> {
   static final List<Widget> _pages = <Widget>[
     const HomePage(),
     const FavoriteListScreen(),
-    const EditBookScreen(),
+    //const EditBookScreen(),
     // const CartScreen(),
+    const OrdersScreen(),
     const UserScreen()
   ];
 
@@ -74,9 +75,7 @@ class _ComicsAppState extends State<ComicsApp> {
             onTap: _onItemTapped,
           ),
         ),
-        routes: {
-          EditBookScreen.routeName: (context) => const EditBookScreen(),
-        },
+        routes: {        },
         onGenerateRoute: (settings) {
           if (settings.name == BookDetailScreen.routeName) {
             final bookId = settings.arguments as String;

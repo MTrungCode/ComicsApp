@@ -4,7 +4,7 @@ import 'userCard.dart';
 
 class UserScreen extends StatelessWidget {
   const UserScreen({Key? key}) : super(key: key);
-
+  static const routeName = '/users';
   @override
   Widget build(BuildContext context) {
     final user = UserManager();

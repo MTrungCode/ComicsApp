@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'edit_book_list_tile.dart';
+import 'user_book_list_tile.dart';
 import 'book_manager.dart';
 
-class EditBookScreen extends StatelessWidget {
-  const EditBookScreen({super.key});
-  static const routeName = '/edit-book';
+class userBookScreen extends StatelessWidget {
+  const userBookScreen({super.key});
+  static const routeName = '/user-book';
   @override
   Widget build(BuildContext context) {
     final booksManager = BookManager();
@@ -13,12 +13,12 @@ class EditBookScreen extends StatelessWidget {
         title: const Text('Quản lý sản phẩm'),
         // actions: <Widget>[
         //   buildAddButton(),
-        //   //buildEditButton(),
+        //   //builduserButton(),
         // ],
       ),
       body: RefreshIndicator(
         onRefresh: () async => print('Refresh'),
-        child: buildEditBookListView(booksManager),
+        child: builduserBookListView(booksManager),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
@@ -29,12 +29,12 @@ class EditBookScreen extends StatelessWidget {
     );
   }
 
-  Widget buildEditBookListView(BookManager booksManager) {
+  Widget builduserBookListView(BookManager booksManager) {
     return ListView.builder(
       itemCount: booksManager.itemCount,
       itemBuilder: (context, index) => Column(
         children: [
-          EditBookListTile(
+          UserBookListTile(
             booksManager.books[index],
           ),
           const Divider(),

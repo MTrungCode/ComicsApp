@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../models/book.dart';
 
-class EditBookListTile extends StatelessWidget {
+class UserBookListTile extends StatelessWidget {
   final Book book;
-  const EditBookListTile(
+  const UserBookListTile(
     this.book, {
     super.key,
   });
@@ -19,7 +19,7 @@ class EditBookListTile extends StatelessWidget {
         width: 100,
         child: Row(
           children: [
-            buildEditButton(context),
+            buildUserButton(context),
             buildDeleteButton(context),
           ],
         ),
@@ -27,7 +27,7 @@ class EditBookListTile extends StatelessWidget {
     );
   }
 
-  Widget buildEditButton(BuildContext context) {
+  Widget buildUserButton(BuildContext context) {
     return IconButton(
       onPressed: () {},
       icon: const Icon(Icons.edit),

@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 import '../../models/cartBook.dart';
-// import '../shared/dialog_utils.dart';
+ import '../shared/dialog_utils.dart';
 
 class CartBookCart extends StatelessWidget {
   final String bookId;
@@ -32,6 +32,12 @@ class CartBookCart extends StatelessWidget {
           size: 40,
         ),
       ),
+      direction: DismissDirection.endToStart,
+      confirmDismiss: (direction) {
+        return showConfirmDialog(
+          context,
+          'Bạn có muốn xóa sản phẩm này ra khỏi giỏ?');
+      },
       onDismissed: (direction) {
         print('Cart book dismissed');
       },
@@ -51,9 +57,10 @@ class CartBookCart extends StatelessWidget {
           leading: CircleAvatar(
             child: Padding(
               padding: const EdgeInsets.all(5),
-              child: FittedBox(
-                child: Text('\$${cardBook.price}'),
-              ),
+              //child: Image.network('https://i.truyenvua.xyz/ebook/190x247/dao-hai-tac_1552224567.jpg?gf=hdfgdfg&mobile=2'),
+               child: FittedBox(
+                child: Text('\$${cardBook.price}'),            
+               ),
             ),
           ),
           title: Text(cardBook.title),

@@ -7,7 +7,7 @@ import '../../search_box.dart';
 
 class FavoriteListScreen extends StatelessWidget {
   const FavoriteListScreen({super.key});
-
+  
   Future<void> _refreshBooks(BuildContext context) async {
     await context.read<BookManager>().favoriteBook;
   }
