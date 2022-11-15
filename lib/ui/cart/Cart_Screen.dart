@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'CartManager.dart';
-import 'CartBookCart.dart';
 
-class CartScreen extends  StatelessWidget {
+import 'cart_manager.dart';
+import 'cart_book_cart.dart';
+
+class CartScreen extends StatelessWidget {
   static const routeName = '/cart';
 
   const CartScreen({super.key});
@@ -28,13 +29,14 @@ class CartScreen extends  StatelessWidget {
 
   Widget buildCartDetails(CartManager cart) {
     return ListView(
-      children: cart.bookEntries 
-      .map(
-        (entry) => CartBookCart(
-          bookId: entry.key,
-          cardBook: entry.value,
-        ),
-      ).toList(),
+      children: cart.bookEntries
+          .map(
+            (entry) => CartBookCart(
+              bookId: entry.key,
+              cardBook: entry.value,
+            ),
+          )
+          .toList(),
     );
   }
 
@@ -46,8 +48,9 @@ class CartScreen extends  StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text('Total',
-            style: TextStyle(fontSize: 20),
+            const Text(
+              'Total',
+              style: TextStyle(fontSize: 20),
             ),
             const Spacer(),
             Chip(
@@ -60,7 +63,7 @@ class CartScreen extends  StatelessWidget {
               backgroundColor: Theme.of(context).primaryColor,
             ),
             TextButton(
-              onPressed: (){
+              onPressed: () {
                 print('Một đơn hàng đã được thêm vào');
               },
               style: TextButton.styleFrom(
@@ -71,6 +74,6 @@ class CartScreen extends  StatelessWidget {
           ],
         ),
       ),
-    );  
+    );
   }
 }

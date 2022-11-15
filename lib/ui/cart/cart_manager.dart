@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
+
 import '../../models/cartBook.dart';
 
-class CartManager {
+class CartManager with ChangeNotifier {
   final Map<String, CartBook> _iteams = {
     'p1': CartBook(
       id: 'b1',

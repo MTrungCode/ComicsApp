@@ -53,9 +53,7 @@ class BookGridTile extends StatelessWidget {
         textAlign: TextAlign.center,
       ),
       leading: IconButton(
-        onPressed: () {
-          print('Added to shopping cart');
-        },
+        onPressed: () {},
         icon: const Icon(Icons.add_shopping_cart),
         color: Theme.of(context).colorScheme.surface,
       ),

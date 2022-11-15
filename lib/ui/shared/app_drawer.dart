@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import '../../search_box.dart';
-import '../../comicsapp_theme.dart';
+import '../auth/auth_manager.dart';
 
 class AppDrawer extends StatefulWidget {
   const AppDrawer({Key? key}) : super(key: key);
@@ -45,15 +47,18 @@ class _AppDrawerState extends State<AppDrawer> {
           ),
           const Divider(),
           ListTile(
-            title: const Text('Đăng nhập'),
-            onTap: () {
-              Navigator.of(context).pushReplacementNamed('/login');
-            },
-          ),
-          ListTile(
             title: const Text('Đăng ký'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/signup');
+            },
+          ),
+          ListTile(
+            title: const Text('Đăng xuất'),
+            onTap: () {
+              Navigator.of(context)
+                ..pop()
+                ..pushReplacementNamed('/');
+              context.read<AuthManager>().logout();
             },
           ),
           const Divider(),

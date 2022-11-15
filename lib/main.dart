@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'screen.dart';
 
-void main() {
+Future<void> main() async {
+  await dotenv.load();
   runApp(const ComicsApp());
 }
 
@@ -37,59 +39,77 @@ class _ComicsAppState extends State<ComicsApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => BookManager(),
-        )
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: theme,
-        home: Scaffold(
-          body: _pages[_selectedIndex],
-          bottomNavigationBar: BottomNavigationBar(
-            selectedItemColor: Colors.white,
-            selectedFontSize: 14,
-            iconSize: 20,
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Trang chủ',
-                backgroundColor: Colors.blueGrey,
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.favorite),
-                label: 'Yêu thích',
-                backgroundColor: Colors.redAccent,
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.card_travel),
-                label: 'Đơn hàng',
-                backgroundColor: Colors.blueAccent,
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.file_present),
-                label: 'Hồ sơ của tôi',
-                backgroundColor: Colors.deepPurpleAccent,
-              ),
-            ],
-            currentIndex: _selectedIndex,
-            onTap: _onItemTapped,
-          ),
+          create: (ctx) => AuthManager(),
         ),
-        routes: {        },
-        onGenerateRoute: (settings) {
-          if (settings.name == BookDetailScreen.routeName) {
-            final bookId = settings.arguments as String;
-            return MaterialPageRoute(
-              builder: (contx) {
-                return BookDetailScreen(
-                  contx.read<BookManager>().findById(bookId),
-                );
-              },
-            );
-          }
-          return null;
-        },
-      ),
+        ChangeNotifierProxyProvider<AuthManager, BookManager>(
+          create: (ctx) => BookManager(),
+          update: (ctx, authManager, bookManager) {
+            bookManager!.authToken = authManager.authToken;
+            return bookManager;
+          },
+        ),
+      ],
+      child: Consumer<AuthManager>(builder: (ctx, authManager, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: theme,
+          home: authManager.isAuth
+              ? Scaffold(
+                  body: _pages[_selectedIndex],
+                  bottomNavigationBar: BottomNavigationBar(
+                    selectedItemColor: Colors.white,
+                    selectedFontSize: 14,
+                    iconSize: 20,
+                    items: const [
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.home),
+                        label: 'Trang chủ',
+                        backgroundColor: Colors.blueGrey,
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.favorite),
+                        label: 'Yêu thích',
+                        backgroundColor: Colors.redAccent,
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.card_travel),
+                        label: 'Đơn hàng',
+                        backgroundColor: Colors.blueAccent,
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.file_present),
+                        label: 'Hồ sơ của tôi',
+                        backgroundColor: Colors.deepPurpleAccent,
+                      ),
+                    ],
+                    currentIndex: _selectedIndex,
+                    onTap: _onItemTapped,
+                  ),
+                )
+              : FutureBuilder(
+                  future: authManager.tryAutoLogin(),
+                  builder: (ctx, snapshot) {
+                    return snapshot.connectionState == ConnectionState.waiting
+                        ? const SplashScreen()
+                        : const AuthScreen();
+                  },
+                ),
+          routes: {},
+          onGenerateRoute: (settings) {
+            if (settings.name == BookDetailScreen.routeName) {
+              final bookId = settings.arguments as String;
+              return MaterialPageRoute(
+                builder: (contx) {
+                  return BookDetailScreen(
+                    contx.read<BookManager>().findById(bookId),
+                  );
+                },
+              );
+            }
+            return null;
+          },
+        );
+      }),
     );
   }
 }
