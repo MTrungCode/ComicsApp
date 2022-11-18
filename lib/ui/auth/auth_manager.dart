@@ -19,6 +19,10 @@ class AuthManager with ChangeNotifier {
     return _authToken;
   }
 
+  String? get getUserId {
+    return _authToken?.userId;
+  }
+
   void _setAuthToken(AuthToken token) {
     _authToken = token;
     _autoLogout();

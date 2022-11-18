@@ -94,7 +94,7 @@ class _ComicsAppState extends State<ComicsApp> {
                         : const AuthScreen();
                   },
                 ),
-          routes: {},
+          // routes: {},
           onGenerateRoute: (settings) {
             if (settings.name == BookDetailScreen.routeName) {
               final bookId = settings.arguments as String;
@@ -102,6 +102,25 @@ class _ComicsAppState extends State<ComicsApp> {
                 builder: (contx) {
                   return BookDetailScreen(
                     contx.read<BookManager>().findById(bookId),
+                  );
+                },
+              );
+            }
+            if (settings.name == AdminBookScreen.routeName) {
+              return MaterialPageRoute(
+                builder: (contx) {
+                  return const AdminBookScreen();
+                },
+              );
+            }
+            if (settings.name == AdminEditBookScreen.routeName) {
+              final bookId = settings.arguments as String?;
+              return MaterialPageRoute(
+                builder: (ctx) {
+                  return AdminEditBookScreen(
+                    bookId != null
+                        ? ctx.read<BookManager>().findById(bookId)
+                        : null,
                   );
                 },
               );

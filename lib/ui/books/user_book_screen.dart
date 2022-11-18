@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'user_book_list_tile.dart';
 import 'book_manager.dart';
 
-class userBookScreen extends StatelessWidget {
-  const userBookScreen({super.key});
+class UserBookScreen extends StatelessWidget {
+  const UserBookScreen({super.key});
   static const routeName = '/user-book';
   @override
   Widget build(BuildContext context) {

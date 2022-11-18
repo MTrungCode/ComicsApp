@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../search_box.dart';
 import '../auth/auth_manager.dart';
+import '../admin/admin_book_screen.dart';
 
 class AppDrawer extends StatefulWidget {
   const AppDrawer({Key? key}) : super(key: key);
@@ -20,6 +21,15 @@ class _AppDrawerState extends State<AppDrawer> {
     return Drawer(
       child: Column(
         children: <Widget>[
+          ListTile(
+            title: const Text(
+              'COMICS STORE',
+              style: TextStyle(fontSize: 16),
+            ),
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed('/');
+            },
+          ),
           Container(
             margin: const EdgeInsets.fromLTRB(10, 5, 10, 5),
             child: TextField(
@@ -45,6 +55,16 @@ class _AppDrawerState extends State<AppDrawer> {
               ],
             ),
           ),
+          AuthManager().getUserId != '4NBzVbU2JSO8CxrXGEWA8PKHx5F3'
+              ? ListTile(
+                  title: const Text('Quản lý truyện'),
+                  onTap: () {
+                    Navigator.of(context).pushNamed(
+                      AdminBookScreen.routeName,
+                    );
+                  },
+                )
+              : const Divider(),
           const Divider(),
           ListTile(
             title: const Text('Đăng ký'),

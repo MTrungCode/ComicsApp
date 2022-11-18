@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'user_manager.dart';
-import 'userCard.dart';
+import 'user_card.dart';
 
 class UserScreen extends StatelessWidget {
   const UserScreen({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class UserScreen extends StatelessWidget {
   }
 }
 
-Widget buildInforUser(UserManager User, BuildContext context) {
+Widget buildInforUser(UserManager user, BuildContext context) {
   return Card(
     margin: const EdgeInsets.all(20),
     child: Padding(

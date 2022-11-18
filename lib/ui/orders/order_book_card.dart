@@ -16,64 +16,64 @@ class _OrderBookCardState extends State<OrderBookCart> {
   var _expanded = false;
 
   @override
-
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.all(10),
-      child:  Column(
-        children: <Widget> [
+      child: Column(
+        children: <Widget>[
           buildOrderSummary(),
-          if(_expanded) buildOrderDetails()
+          if (_expanded) buildOrderDetails()
         ],
       ),
     );
   }
+
   Widget buildOrderDetails() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
-      height: min(widget.order.bookCount * 40.0 + 10, 100 ),
+      height: min(widget.order.bookCount * 40.0 + 10, 100),
       child: ListView(
         children: widget.order.books
-        .map(
-          (prod) => Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              // Image.network('https://i.truyenvua.xyz/ebook/190x247/dao-hai-tac_1552224567.jpg?gf=hdfgdfg&mobile=2',
-              // width: 50,
-              // height: 30,),
-              Text(
-                prod.title,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.red,
-                ),
-              ),
-              Text(
-                ' Số lượng: ${prod.quality} \n Giá tiền: \$${prod.price}',
-                style: const TextStyle(
-                  fontSize: 16,
-                  color: Colors.black,
-                ),
-              )
-            ],
-          )
-        )
-        .toList(),
+            .map((prod) => Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // Image.network('https://i.truyenvua.xyz/ebook/190x247/dao-hai-tac_1552224567.jpg?gf=hdfgdfg&mobile=2',
+                    // width: 50,
+                    // height: 30,),
+                    Text(
+                      prod.title,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red,
+                      ),
+                    ),
+                    Text(
+                      ' Số lượng: ${prod.quality} \n Giá tiền: \$${prod.price}',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.black,
+                      ),
+                    )
+                  ],
+                ))
+            .toList(),
       ),
     );
   }
+
   Widget buildOrderSummary() {
     return ListTile(
-      title: Text('Tổng tiền: \$${widget.order.amount}',
-      style: TextStyle(
-        fontSize: 18,
-        color: Color.fromARGB(255, 82, 33, 243),
-        fontWeight: FontWeight.bold,
-      ),),
-      subtitle: Text(
-        DateFormat('dd/MM/yyyy hh:mm').format(widget.order.dateTime)
+      title: Text(
+        'Tổng tiền: \$${widget.order.amount}',
+        style: const TextStyle(
+          fontSize: 18,
+          color: Color.fromARGB(255, 82, 33, 243),
+          fontWeight: FontWeight.bold,
+        ),
       ),
+      subtitle:
+          Text(DateFormat('dd/MM/yyyy hh:mm').format(widget.order.dateTime)),
       trailing: IconButton(
         icon: Icon(_expanded ? Icons.expand_less : Icons.expand_more),
         onPressed: () {

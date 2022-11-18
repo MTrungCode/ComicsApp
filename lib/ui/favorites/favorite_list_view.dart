@@ -12,9 +12,9 @@ class FavoriteListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Book> listfavor = [];
+    // final List<Book> listfavor = [];
     final favoriteBooks = context.select<BookManager, List<Book>>(
-        (bookManager) => showFavorites ? bookManager.favoriteBook : listfavor);
+        (bookManager) => bookManager.favoriteBook);
     return ListView.builder(
       itemCount: favoriteBooks.length,
       itemBuilder: (ctx, i) => Column(

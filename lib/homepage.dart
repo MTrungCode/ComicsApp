@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
         ],
       ),
       drawer: const AppDrawer(),
-      body: const BookGridScreen(),
+      body: const BookOverviewScreen(),
     );
   }
 

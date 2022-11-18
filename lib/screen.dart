@@ -3,7 +3,7 @@ export 'homepage.dart';
 
 export 'ui/books/book_detail_screen.dart';
 export 'ui/books/book_manager.dart';
-export 'ui/books/book_grid_screen.dart';
+export 'ui/books/book_overview_screen.dart';
 
 export 'ui/books/user_book_screen.dart';
 
@@ -21,3 +21,6 @@ export 'ui/orders/order_screen.dart';
 
 export 'ui/auth/auth_manager.dart';
 export 'ui/auth/auth_screen.dart';
+
+export 'ui/admin/admin_book_screen.dart';
+export 'ui/admin/admin_edit_book_screen.dart';

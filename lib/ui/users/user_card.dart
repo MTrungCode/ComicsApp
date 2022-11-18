@@ -1,5 +1,5 @@
-import 'package:comicsapp/models/user.dart';
 import 'package:flutter/material.dart';
+
 import 'circle_image.dart';
 
 class UserCard extends StatelessWidget {

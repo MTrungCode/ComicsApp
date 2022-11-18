@@ -20,7 +20,7 @@ class _FavoriteListScreenState extends State<FavoriteListScreen> {
   @override
   void initState() {
     super.initState();
-    _fetchBooks = context.read<BookManager>().fetchFavoriteBooks();
+    _fetchBooks = context.read<BookManager>().fetchBooks();
   }
 
   @override

@@ -15,7 +15,7 @@ class BookManager with ChangeNotifier {
     _booksService.authToken = authToken;
   }
 
-  Future<void> fetchFavoriteBooks([bool filterByUser = false]) async {
+  Future<void> fetchBooks([bool filterByUser = false]) async {
     _items = await _booksService.fetchBooks(filterByUser);
     notifyListeners();
   }
@@ -45,33 +45,33 @@ class BookManager with ChangeNotifier {
     }
   }
 
-  // Future<void> addBook(Book book) async {
-  //   final newBook = await _booksService.addBook(book);
-  //   if (newBook != null) {
-  //     _items.add(newBook);
-  //     notifyListeners();
-  //   }
-  // }
+  Future<void> addBook(Book book) async {
+    final newBook = await _booksService.addBook(book);
+    if (newBook != null) {
+      _items.add(newBook);
+      notifyListeners();
+    }
+  }
 
-  // Future<void> updateBook(Book book) async {
-  //   final index = _items.indexWhere((item) => item.id == book.id);
-  //   if (index >= 0) {
-  //     if (await _booksService.updateBook(book)) {
-  //       _items[index] = book;
-  //       notifyListeners();
-  //     }
-  //   }
-  // }
+  Future<void> updateBook(Book book) async {
+    final index = _items.indexWhere((item) => item.id == book.id);
+    if (index >= 0) {
+      if (await _booksService.updateBook(book)) {
+        _items[index] = book;
+        notifyListeners();
+      }
+    }
+  }
 
-  // Future<void> deleteBook(String id) async {
-  //   final index = _items.indexWhere((item) => item.id == id);
-  //   Book? existingBook = _items[index];
-  //   _items.removeAt(index);
-  //   notifyListeners();
+  Future<void> deleteBook(String id) async {
+    final index = _items.indexWhere((item) => item.id == id);
+    Book? existingBook = _items[index];
+    _items.removeAt(index);
+    notifyListeners();
 
-  //   if (!await _booksService.deleteBook(id)) {
-  //     _items.insert(index, existingBook);
-  //     notifyListeners();
-  //   }
-  // }
+    if (!await _booksService.deleteBook(id)) {
+      _items.insert(index, existingBook);
+      notifyListeners();
+    }
+  }
 }

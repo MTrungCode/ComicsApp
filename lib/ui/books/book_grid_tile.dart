@@ -34,7 +34,7 @@ class BookGridTile extends StatelessWidget {
 
   Widget buildFooterButton(BuildContext context) {
     return GridTileBar(
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: Colors.blue[300],
       trailing: ValueListenableBuilder<bool>(
         valueListenable: book.isFavoriteListenable,
         builder: (context, isFavorite, child) {
