@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'screen.dart';
+import 'ui/cart/cart_manager.dart';
+import 'ui/orders/order_manager.dart';
 
 Future<void> main() async {
   await dotenv.load();
@@ -24,6 +26,7 @@ class _ComicsAppState extends State<ComicsApp> {
     //const EditBookScreen(),
     // const CartScreen(),
     const OrdersScreen(),
+    //const userBookScreen()
     const UserScreen()
   ];
 
@@ -38,6 +41,15 @@ class _ComicsAppState extends State<ComicsApp> {
     final theme = ComicsAppTheme.light();
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(
+          create: (context) => BookManager(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CartManager(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => OrdersManager(),
+        ),
         ChangeNotifierProvider(
           create: (ctx) => AuthManager(),
         ),
@@ -106,21 +118,41 @@ class _ComicsAppState extends State<ComicsApp> {
                 },
               );
             }
-            if (settings.name == AdminBookScreen.routeName) {
+            if (settings.name == userBookScreen.routeName) {
               return MaterialPageRoute(
                 builder: (contx) {
-                  return const AdminBookScreen();
+                  return const userBookScreen();
                 },
               );
             }
-            if (settings.name == AdminEditBookScreen.routeName) {
+            if (settings.name == EditBookScreen.routeName) {
               final bookId = settings.arguments as String?;
               return MaterialPageRoute(
                 builder: (ctx) {
-                  return AdminEditBookScreen(
+                  return EditBookScreen(
                     bookId != null
                         ? ctx.read<BookManager>().findById(bookId)
                         : null,
+                  );
+                },
+              );
+            }
+            if (settings.name == EditBookScreen.routeName) {
+              final bookId = settings.arguments as String?;
+              return MaterialPageRoute(
+                builder: (contx) {
+                  return EditBookScreen(
+                    bookId != null ? contx.read<BookManager>().findById(bookId) : null,
+                  );
+                },
+              );
+            }
+            if (settings.name == BookManagerScreen.routeName) {
+              final bookId = settings.arguments as String;
+              return MaterialPageRoute(
+                builder: (contx) {
+                  return BookManagerScreen(
+                    contx.read<BookManager>().findById(bookId),
                   );
                 },
               );

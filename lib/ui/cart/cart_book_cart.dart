@@ -1,8 +1,9 @@
 // import 'package:comicsapp/ui/cart/CartManager.dart';
 import 'package:flutter/material.dart';
-
+import 'cart_manager.dart';
 import '../../models/cart_book.dart';
 import '../shared/dialog_utils.dart';
+import 'package:provider/provider.dart';
 
 class CartBookCart extends StatelessWidget {
   final String bookId;
@@ -35,10 +36,11 @@ class CartBookCart extends StatelessWidget {
       direction: DismissDirection.endToStart,
       confirmDismiss: (direction) {
         return showConfirmDialog(
-            context, 'Bạn có muốn xóa sản phẩm này ra khỏi giỏ?');
+          context,
+          'Bạn có muốn xóa sản phẩm này ra khỏi giỏ?');
       },
       onDismissed: (direction) {
-        print('Cart book dismissed');
+        context.read<CartManager>().removeItem(bookId);
       },
       child: buildBookCart(),
     );
@@ -48,23 +50,17 @@ class CartBookCart extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.symmetric(
         horizontal: 15,
-        vertical: 4,
+        vertical: 5,
       ),
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: ListTile(
-          leading: CircleAvatar(
-            child: Padding(
-              padding: const EdgeInsets.all(5),
-              //child: Image.network('https://i.truyenvua.xyz/ebook/190x247/dao-hai-tac_1552224567.jpg?gf=hdfgdfg&mobile=2'),
-              child: FittedBox(
-                child: Text('\$${cardBook.price}'),
-              ),
-            ),
-          ),
+           leading: CircleAvatar(
+            backgroundImage: NetworkImage(cardBook.imageUrl),
+           ),
           title: Text(cardBook.title),
-          subtitle: Text('Total: \$${(cardBook.price * cardBook.quality)}'),
-          trailing: Text('${cardBook.quality} x'),
+          subtitle: Text('Tổng: \$${(cardBook.price * cardBook.quality)}'),
+          trailing: Text('Số lượng: '+'${cardBook.quality}'),
         ),
       ),
     );

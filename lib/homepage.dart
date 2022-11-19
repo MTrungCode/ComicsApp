@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'ui/shared/app_drawer.dart';
 import 'screen.dart';
 import './ui/books/top_right_badge.dart';
-
+import './ui/cart/cart_manager.dart';
+import 'package:provider/provider.dart';
 class HomePage extends StatelessWidget {
   const HomePage({
     Key? key,
@@ -35,17 +36,21 @@ class HomePage extends StatelessWidget {
   }
 
   Widget buildShoppingCart(BuildContext context) {
-    return TopRightBadge(
-      data: CartManager().bookCount,
-      child: IconButton(
-        icon: const Icon(Icons.shopping_cart),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const CartScreen()),
-          );
-        },
-      ),
+    return Consumer<CartManager>(
+      builder: (ctx, cartManager, child) {
+        return TopRightBadge (
+          data: cartManager.bookCount,
+          child: IconButton(
+            icon: const Icon(Icons.shopping_cart),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const CartScreen()),
+              );
+            },
+          ),
+        ) ;
+      },
     );
   }
 }

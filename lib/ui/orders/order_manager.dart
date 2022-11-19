@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 
-import '../../models/CartBook.dart';
+import '../../models/cart_book.dart';
 import '../../models/order_book.dart';
 class OrdersManager with ChangeNotifier {
-  final List<OrderBook> _orders = [
+  List<OrderBook> _orders = [
     OrderBook(
       id: 'p1',
       amount: 4200000,
@@ -32,6 +32,10 @@ class OrdersManager with ChangeNotifier {
         dateTime: DateTime.now(),
       ),
     );
+    notifyListeners();
+  }
+  void orderClear() {
+    _orders = [];
     notifyListeners();
   }
 }

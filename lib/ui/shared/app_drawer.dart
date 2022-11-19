@@ -55,12 +55,12 @@ class _AppDrawerState extends State<AppDrawer> {
               ],
             ),
           ),
-          AuthManager().getUserId != '4NBzVbU2JSO8CxrXGEWA8PKHx5F3'
+          AuthManager().getUserId != 'IAQsaU7HeLWq2NP2Me3AnRuClAG2'
               ? ListTile(
                   title: const Text('Quản lý truyện'),
                   onTap: () {
                     Navigator.of(context).pushNamed(
-                      AdminBookScreen.routeName,
+                      userBookScreen.routeName,
                     );
                   },
                 )

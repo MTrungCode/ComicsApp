@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 
 import '../../models/book.dart';
 import 'book_manager.dart';
+import '../cart/cart_manager.dart';
+import '../../screen.dart';
 
 class BookDetailScreen extends StatelessWidget {
   static const routeName = '/book-detail';
@@ -23,16 +25,29 @@ class BookDetailScreen extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
+
         child: Column(
           children: <Widget>[
             const SizedBox(height: 10),
             SizedBox(
               height: 300,
-              width: double.infinity,
-              child: Image.network(
+              width: 200,
+              child: Container(     
+                decoration: BoxDecoration(
+                  border: Border.all(
+                  width: 5,
+                  color: Color.fromARGB(255, 194, 197, 194),
+                  ),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(8),
+                  ),
+                ),
+               // padding: EdgeInsets.symmetric(vertical: 10),          
+                child: Image.network(
                 book.imageUrl,
                 fit: BoxFit.contain,
               ),
+              )
             ),
             const SizedBox(height: 10),
             Text(
@@ -43,10 +58,13 @@ class BookDetailScreen extends StatelessWidget {
               'Thê loại: ${book.type}',
               style: const TextStyle(fontSize: 14),
             ),
-            Text(
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 15),             
+              child: Text(
               'Nội dung: ${book.description}',
               softWrap: true,
               style: const TextStyle(fontSize: 14),
+            ),
             ),
             Text(
               'Giá bán: ${book.price} đ',
@@ -57,6 +75,7 @@ class BookDetailScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 14),
               width: double.infinity,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround  ,
                 children: <Widget>[
                   ClipRRect(
                     borderRadius: BorderRadius.circular(4),
@@ -89,9 +108,9 @@ class BookDetailScreen extends StatelessWidget {
                             decoration: const BoxDecoration(
                               gradient: LinearGradient(
                                 colors: <Color>[
-                                  Color.fromRGBO(13, 161, 80, 1),
-                                  Color.fromRGBO(13, 161, 80, 1),
-                                  Color.fromRGBO(13, 161, 80, 1),
+                                  Color.fromARGB(255, 18, 188, 95),
+                                  Color.fromARGB(255, 22, 151, 80),
+                                  Color.fromARGB(255, 51, 174, 106),
                                 ],
                               ),
                             ),
@@ -117,12 +136,32 @@ class BookDetailScreen extends StatelessWidget {
       height: 60,
       child: TextButton(
         onPressed: () {
-          print('Added book to shopping cart');
+          final cart = context.read<CartManager>();
+          cart.addBook(book);
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(
+                content: const Text(
+                'Đã thêm vào giỏ hàng',
+                ),
+                duration: const Duration(seconds: 3),
+                action: SnackBarAction(
+                  label: 'Hoàn tác',
+                  textColor: Color.fromARGB(255, 235, 235, 235),
+                  onPressed: () {
+                  cart.removeSingleItem(book.id!);
+                  },
+                ),
+                backgroundColor: Color.fromARGB(255, 30, 144, 45),
+              )
+            );
         },
-        style: TextButton.styleFrom(
-          foregroundColor: Colors.white,
+        child: const Text("Thêm vào giỏ hàng",
+          style: TextStyle(
+            color: Colors.white
+          ),
         ),
-        child: const Text('Thêm vào giỏ hàng'),
       ),
     );
   }
@@ -133,12 +172,15 @@ class BookDetailScreen extends StatelessWidget {
       height: 60,
       child: TextButton(
         onPressed: () {
-          print('Go to page Thanh toán');
+          Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const CartScreen()),
+              );
         },
         style: TextButton.styleFrom(
           foregroundColor: Colors.white,
         ),
-        child: const Text('Mua ngay'),
+        child: const Text('Đến giỏ hàng'),
       ),
     );
   }
