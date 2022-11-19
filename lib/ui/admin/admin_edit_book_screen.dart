@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../models/book.dart';
@@ -9,48 +7,48 @@ import '../books/book_manager.dart';
 class EditBookScreen extends StatefulWidget {
   static const routeName = '/edit-product';
 
-    EditBookScreen(
-      Book? book, {
-        super.key,
-    }) {
-      if (book == null) {
-        this.book = Book(
-          id: null,
-          title: '',
-          type: '',
-          price: 0,
-          description: '',
-          imageUrl: '',
-        );
-      } else {
-    this.book = book;
+  EditBookScreen(
+    Book? book, {
+    super.key,
+  }) {
+    if (book == null) {
+      this.book = Book(
+        id: null,
+        title: '',
+        type: '',
+        price: 0,
+        description: '',
+        imageUrl: '',
+      );
+    } else {
+      this.book = book;
     }
   }
   late final Book book;
 
   @override
-    State<EditBookScreen> createState() => _EditBookScreenState();
+  State<EditBookScreen> createState() => _EditBookScreenState();
 }
+
 class _EditBookScreenState extends State<EditBookScreen> {
   final _imageUrlController = TextEditingController();
   final _imageUrlFocusNode = FocusNode();
   final _editForm = GlobalKey<FormState>();
   late Book _editedBook;
   var _isLoading = false;
-  
-  @override
 
   bool _isValidImageUrl(String value) {
-    return (value.startsWith('http') || value.startsWith('https')) && 
-          (value.endsWith('.png') || 
-              value.endsWith('.jpg') || 
-              value.endsWith('. jpeg'));
+    return (value.startsWith('http') || value.startsWith('https')) &&
+        (value.endsWith('.png') ||
+            value.endsWith('.jpg') ||
+            value.endsWith('. jpeg'));
   }
+
   @override
-  void initState() { 
+  void initState() {
     _imageUrlFocusNode.addListener(() {
-      if(!_imageUrlFocusNode.hasFocus) {
-        if(!_isValidImageUrl(_imageUrlController.text)) {
+      if (!_imageUrlFocusNode.hasFocus) {
+        if (!_isValidImageUrl(_imageUrlController.text)) {
           return;
         }
         setState(() {});
@@ -67,72 +65,74 @@ class _EditBookScreenState extends State<EditBookScreen> {
     _imageUrlFocusNode.dispose();
     super.dispose();
   }
-   @override
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Chỉnh sửa thông tin sách'),
       ),
       body: _isLoading
-        ? const Center(
-          child: CircularProgressIndicator(),
-        )
-        : Padding(
-          padding:  const EdgeInsets.all(16.0),
-          child: Form(
-            key: _editForm,
-            child: ListView(
-              padding: const EdgeInsets.all(10.0),
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.fromLTRB(0, 15, 0, 0),
-                  child: buildTitleField(),
-                ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(0, 15, 0, 0),                
-                  child: buildPriceField(),
-                ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(0, 15, 0, 0),
-                  child: buildCategoryField(),
-                ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(0, 15, 0, 0),
-                  child: buildDescriptionField(),
-                ),
-                Container(       
-                  margin: EdgeInsets.fromLTRB(0, 0, 0, 15),
-                 child: buildBookPreview(), 
-                ),
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Form(
+                key: _editForm,
+                child: ListView(
+                  padding: const EdgeInsets.all(10.0),
+                  children: <Widget>[
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                      child: buildTitleField(),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                      child: buildPriceField(),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                      child: buildCategoryField(),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                      child: buildDescriptionField(),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                      child: buildBookPreview(),
+                    ),
 
-                // Center(
-                //   child: TextButton(
-                //     onPressed: _saveForm,
-                //     child: Text('Lưu'),  
-                //     style: TextButton.styleFrom(
-                //       foregroundColor: Color.fromARGB(255, 245, 245, 245),
-                //       backgroundColor: Color.fromARGB(255, 49, 163, 32)  ,    
-                //       minimumSize: Size(100, 50)      
-                //     ),
-                //   ),
-                // ),
-              ],
+                    // Center(
+                    //   child: TextButton(
+                    //     onPressed: _saveForm,
+                    //     child: Text('Lưu'),
+                    //     style: TextButton.styleFrom(
+                    //       foregroundColor: Color.fromARGB(255, 245, 245, 245),
+                    //       backgroundColor: Color.fromARGB(255, 49, 163, 32)  ,
+                    //       minimumSize: Size(100, 50)
+                    //     ),
+                    //   ),
+                    // ),
+                  ],
+                ),
+              ),
             ),
-          ),
-        ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _saveForm,
-        icon: Icon(Icons.save),
-        label: Text("SAVE"),
+        icon: const Icon(Icons.save),
+        label: const Text("SAVE"),
         backgroundColor: Colors.blue,
       ),
-    );  
+    );
   }
- 
+
   TextFormField buildTitleField() {
     return TextFormField(
       initialValue: _editedBook.title,
-      decoration: const InputDecoration(labelText: 'Tên truyện', border: OutlineInputBorder()),
+      decoration: const InputDecoration(
+          labelText: 'Tên truyện', border: OutlineInputBorder()),
       textInputAction: TextInputAction.next,
       autofocus: true,
       validator: (value) {
@@ -150,8 +150,10 @@ class _EditBookScreenState extends State<EditBookScreen> {
   TextFormField buildPriceField() {
     return TextFormField(
       initialValue: _editedBook.price.toString(),
-      decoration: const InputDecoration(labelText: 'Giá truyện',
-      border: OutlineInputBorder(),),
+      decoration: const InputDecoration(
+        labelText: 'Giá truyện',
+        border: OutlineInputBorder(),
+      ),
       textInputAction: TextInputAction.next,
       keyboardType: TextInputType.number,
       validator: (value) {
@@ -175,7 +177,8 @@ class _EditBookScreenState extends State<EditBookScreen> {
   TextFormField buildCategoryField() {
     return TextFormField(
       initialValue: _editedBook.type,
-      decoration: const InputDecoration(labelText: 'Thể loại',border: OutlineInputBorder()),
+      decoration: const InputDecoration(
+          labelText: 'Thể loại', border: OutlineInputBorder()),
       maxLines: 1,
       textInputAction: TextInputAction.next,
       validator: (value) {
@@ -196,7 +199,8 @@ class _EditBookScreenState extends State<EditBookScreen> {
   TextFormField buildDescriptionField() {
     return TextFormField(
       initialValue: _editedBook.description,
-      decoration: const InputDecoration(labelText: 'Mô tả',border: OutlineInputBorder()),
+      decoration: const InputDecoration(
+          labelText: 'Mô tả', border: OutlineInputBorder()),
       maxLines: 3,
       keyboardType: TextInputType.multiline,
       validator: (value) {
@@ -231,15 +235,15 @@ class _EditBookScreenState extends State<EditBookScreen> {
               color: Colors.grey,
             ),
           ),
-          child: _imageUrlController.text.isEmpty 
-          ? const Text('Nhập đường dẫn ảnh') 
-          : FittedBox(
-              child: Image.network(
-                _imageUrlController.text,
-                fit: BoxFit.cover,
-              ),
-            ),
-      ),
+          child: _imageUrlController.text.isEmpty
+              ? const Text('Nhập đường dẫn ảnh')
+              : FittedBox(
+                  child: Image.network(
+                    _imageUrlController.text,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+        ),
         Expanded(
           child: buildImageURLField(),
         )
@@ -249,13 +253,14 @@ class _EditBookScreenState extends State<EditBookScreen> {
 
   TextFormField buildImageURLField() {
     return TextFormField(
-      decoration: const InputDecoration(labelText: 'Đường dẫn ảnh',border: OutlineInputBorder()),
+      decoration: const InputDecoration(
+          labelText: 'Đường dẫn ảnh', border: OutlineInputBorder()),
       keyboardType: TextInputType.url,
       textInputAction: TextInputAction.done,
       controller: _imageUrlController,
       focusNode: _imageUrlFocusNode,
       onFieldSubmitted: (value) => _saveForm(),
-      validator:(value) {
+      validator: (value) {
         if (value!.isEmpty) {
           return 'Nhập đường dẫn ảnh.';
         }
@@ -275,32 +280,29 @@ class _EditBookScreenState extends State<EditBookScreen> {
     if (!isValid) {
       return;
     }
-  _editForm.currentState!.save();
+    _editForm.currentState!.save();
 
-  setState(() {
-    _isLoading = true;
-  });
+    setState(() {
+      _isLoading = true;
+    });
 
-  try {
-    final booksManager = context.read<BookManager>();
-    if (_editedBook.id != null) {
-      booksManager.updateBook(_editedBook);
-  } else {
-       booksManager.addBook(_editedBook);
-  }
-  } catch (error) {
+    try {
+      final booksManager = context.read<BookManager>();
+      if (_editedBook.id != null) {
+        booksManager.updateBook(_editedBook);
+      } else {
+        booksManager.addBook(_editedBook);
+      }
+    } catch (error) {
       await showErrorDialog(context, 'Có lỗi xảy ra.');
-  }
+    }
 
-  setState(() {
-    _isLoading = false;
-  });
-  
-  if(mounted) {
-    Navigator.of(context).pop();
+    setState(() {
+      _isLoading = false;
+    });
+
+    if (mounted) {
+      Navigator.of(context).pop();
+    }
   }
 }
-
-}
-
-

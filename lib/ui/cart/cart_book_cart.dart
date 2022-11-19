@@ -36,8 +36,7 @@ class CartBookCart extends StatelessWidget {
       direction: DismissDirection.endToStart,
       confirmDismiss: (direction) {
         return showConfirmDialog(
-          context,
-          'Bạn có muốn xóa sản phẩm này ra khỏi giỏ?');
+            context, 'Bạn có muốn xóa sản phẩm này ra khỏi giỏ?');
       },
       onDismissed: (direction) {
         context.read<CartManager>().removeItem(bookId);
@@ -55,12 +54,12 @@ class CartBookCart extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: ListTile(
-           leading: CircleAvatar(
+          leading: CircleAvatar(
             backgroundImage: NetworkImage(cardBook.imageUrl),
-           ),
+          ),
           title: Text(cardBook.title),
           subtitle: Text('Tổng: \$${(cardBook.price * cardBook.quality)}'),
-          trailing: Text('Số lượng: '+'${cardBook.quality}'),
+          trailing: Text('Số lượng: ${cardBook.quality}'),
         ),
       ),
     );

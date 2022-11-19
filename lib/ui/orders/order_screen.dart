@@ -11,20 +11,17 @@ class OrdersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ordersManager = OrdersManager();
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Đơn hàng của bạn'),
-      ),
-
-      body: Consumer<OrdersManager>(
-        builder: (ctx, ordersManager, child) {
-          return ListView.builder(
-            itemCount: ordersManager.orderCount,
-            itemBuilder: (ctx, i) => OrderBookCart(ordersManager.orders[i]),
-          );
-        },
-      )
-    ); 
+        appBar: AppBar(
+          title: const Text('Đơn hàng của bạn'),
+        ),
+        body: Consumer<OrdersManager>(
+          builder: (ctx, ordersManager, child) {
+            return ListView.builder(
+              itemCount: ordersManager.orderCount,
+              itemBuilder: (ctx, i) => OrderBookCart(ordersManager.orders[i]),
+            );
+          },
+        ));
   }
 }

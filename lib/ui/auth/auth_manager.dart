@@ -15,12 +15,13 @@ class AuthManager with ChangeNotifier {
     return authToken != null && authToken!.isValid;
   }
 
-  AuthToken? get authToken {
-    return _authToken;
+  bool get isAdmin {
+    return authToken != null &&
+        authToken!.userId == "4NBzVbU2JSO8CxrXGEWA8PKHx5F3";
   }
 
-  String? get getUserId {
-    return _authToken?.userId;
+  AuthToken? get authToken {
+    return _authToken;
   }
 
   void _setAuthToken(AuthToken token) {

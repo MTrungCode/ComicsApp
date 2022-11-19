@@ -92,8 +92,17 @@ class _AuthCardState extends State<AuthCard> {
             child: Column(
               children: <Widget>[
                 _buildEmailField(),
+                const SizedBox(
+                  height: 10,
+                ),
                 _buildPasswordField(),
-                if (_authMode == AuthMode.signup) _buildPasswordConfirmField(),
+                if (_authMode == AuthMode.signup)
+                  Column(
+                    children: [
+                      const SizedBox(height: 10),
+                      _buildPasswordConfirmField(),
+                    ],
+                  ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -106,7 +115,17 @@ class _AuthCardState extends State<AuthCard> {
                     return _buildSubmitButton();
                   },
                 ),
-                _buildAuthModeSwitchButton(),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 55.0),
+                      child: Text(_authMode == AuthMode.login
+                          ? 'Bạn chưa có tài khoản?'
+                          : 'Bạn đã có tài khoản?'),
+                    ),
+                    _buildAuthModeSwitchButton(),
+                  ],
+                ),
               ],
             ),
           ),
@@ -119,14 +138,13 @@ class _AuthCardState extends State<AuthCard> {
     return TextButton(
       onPressed: _switchAuthMode,
       style: TextButton.styleFrom(
-        padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 4),
+        padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4),
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         textStyle: TextStyle(
           color: Theme.of(context).primaryColor,
         ),
       ),
-      child:
-          Text('${_authMode == AuthMode.login ? 'SIGNUP' : 'LOGIN'} INSTEAD'),
+      child: Text(_authMode == AuthMode.login ? 'Đăng ký' : 'Đăng nhập'),
     );
   }
 
@@ -150,7 +168,10 @@ class _AuthCardState extends State<AuthCard> {
   Widget _buildPasswordConfirmField() {
     return TextFormField(
       enabled: _authMode == AuthMode.signup,
-      decoration: const InputDecoration(labelText: 'Confirm Password'),
+      decoration: const InputDecoration(
+        labelText: 'Confirm Password',
+        border: OutlineInputBorder(),
+      ),
       obscureText: true,
       validator: _authMode == AuthMode.signup
           ? (value) {
@@ -165,7 +186,10 @@ class _AuthCardState extends State<AuthCard> {
 
   Widget _buildPasswordField() {
     return TextFormField(
-      decoration: const InputDecoration(labelText: 'Password'),
+      decoration: const InputDecoration(
+        labelText: 'Password',
+        border: OutlineInputBorder(),
+      ),
       obscureText: true,
       controller: _passwordController,
       validator: (value) {
@@ -182,7 +206,10 @@ class _AuthCardState extends State<AuthCard> {
 
   Widget _buildEmailField() {
     return TextFormField(
-      decoration: const InputDecoration(labelText: 'E-Mail'),
+      decoration: const InputDecoration(
+        labelText: 'E-Mail',
+        border: OutlineInputBorder(),
+      ),
       keyboardType: TextInputType.emailAddress,
       validator: (value) {
         if (value!.isEmpty || !value.contains('@')) {

@@ -4,6 +4,7 @@ import '../cart/cart_manager.dart';
 import '../../models/book.dart';
 import 'book_detail_screen.dart';
 import 'book_manager.dart';
+
 class BookGridTile extends StatelessWidget {
   const BookGridTile(this.book, {super.key});
 
@@ -57,22 +58,20 @@ class BookGridTile extends StatelessWidget {
           cart.addBook(book);
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(
-                content: const Text(
+            ..showSnackBar(SnackBar(
+              content: const Text(
                 'Đã thêm vào giỏ hàng',
-                ),
-                duration: const Duration(seconds: 3),
-                action: SnackBarAction(
-                  label: 'Hoàn tác',
-                  textColor: Color.fromARGB(255, 255, 255, 255),
-                  onPressed: () {
+              ),
+              duration: const Duration(seconds: 3),
+              action: SnackBarAction(
+                label: 'Hoàn tác',
+                textColor: const Color.fromARGB(255, 255, 255, 255),
+                onPressed: () {
                   cart.removeSingleItem(book.id!);
-                  },
-                ),
-                backgroundColor: Color.fromARGB(255, 30, 144, 45),
-              )
-            );
+                },
+              ),
+              backgroundColor: const Color.fromARGB(255, 30, 144, 45),
+            ));
         },
         icon: const Icon(Icons.add_shopping_cart),
         color: Theme.of(context).colorScheme.surface,

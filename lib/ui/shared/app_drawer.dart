@@ -15,21 +15,13 @@ class AppDrawer extends StatefulWidget {
 class _AppDrawerState extends State<AppDrawer> {
   final controller = TextEditingController();
   var _expanded = false;
+  final authManager = AuthManager();
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: Column(
         children: <Widget>[
-          ListTile(
-            title: const Text(
-              'COMICS STORE',
-              style: TextStyle(fontSize: 16),
-            ),
-            onTap: () {
-              Navigator.of(context).pushReplacementNamed('/');
-            },
-          ),
           Container(
             margin: const EdgeInsets.fromLTRB(10, 5, 10, 5),
             child: TextField(
@@ -55,17 +47,16 @@ class _AppDrawerState extends State<AppDrawer> {
               ],
             ),
           ),
-          AuthManager().getUserId != 'IAQsaU7HeLWq2NP2Me3AnRuClAG2'
+          context.read<AuthManager>().isAdmin
               ? ListTile(
                   title: const Text('Quản lý truyện'),
                   onTap: () {
                     Navigator.of(context).pushNamed(
-                      userBookScreen.routeName,
+                      AdminBookScreen.routeName,
                     );
                   },
                 )
               : const Divider(),
-          const Divider(),
           ListTile(
             title: const Text('Đăng ký'),
             onTap: () {

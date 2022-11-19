@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'screen.dart';
-import 'ui/cart/cart_manager.dart';
+// import 'ui/cart/cart_manager.dart';
 import 'ui/orders/order_manager.dart';
 
 Future<void> main() async {
@@ -23,10 +23,7 @@ class _ComicsAppState extends State<ComicsApp> {
   static final List<Widget> _pages = <Widget>[
     const HomePage(),
     const FavoriteListScreen(),
-    //const EditBookScreen(),
-    // const CartScreen(),
     const OrdersScreen(),
-    //const userBookScreen()
     const UserScreen()
   ];
 
@@ -41,9 +38,6 @@ class _ComicsAppState extends State<ComicsApp> {
     final theme = ComicsAppTheme.light();
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (context) => BookManager(),
-        ),
         ChangeNotifierProvider(
           create: (context) => CartManager(),
         ),
@@ -118,10 +112,10 @@ class _ComicsAppState extends State<ComicsApp> {
                 },
               );
             }
-            if (settings.name == userBookScreen.routeName) {
+            if (settings.name == AdminBookScreen.routeName) {
               return MaterialPageRoute(
                 builder: (contx) {
-                  return const userBookScreen();
+                  return const AdminBookScreen();
                 },
               );
             }
@@ -142,7 +136,9 @@ class _ComicsAppState extends State<ComicsApp> {
               return MaterialPageRoute(
                 builder: (contx) {
                   return EditBookScreen(
-                    bookId != null ? contx.read<BookManager>().findById(bookId) : null,
+                    bookId != null
+                        ? contx.read<BookManager>().findById(bookId)
+                        : null,
                   );
                 },
               );

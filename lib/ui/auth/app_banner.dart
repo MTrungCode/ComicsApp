@@ -12,28 +12,31 @@ class AppBanner extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 20.0),
       padding: const EdgeInsets.symmetric(
-        vertical: 8.0,
-        horizontal: 94.0,
+        vertical: 20.0,
+        horizontal: 40.0,
       ),
-      transform: Matrix4.rotationZ(-8 * pi / 180)..translate(-10.0),
+      transform: Matrix4.skewX(50 * pi / 360)..translate(-26.5),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: Colors.deepPurpleAccent.shade700,
+        borderRadius: BorderRadius.circular(2),
+        color: const Color.fromARGB(255, 136, 55, 248),
+        gradient: LinearGradient(
+          colors: [Colors.red.shade300, Colors.blue.shade400],
+        ),
         boxShadow: const [
           BoxShadow(
-            blurRadius: 8,
+            blurRadius: 10,
             color: Colors.white10,
-            offset: Offset(0, 2),
+            offset: Offset(0, 3),
           )
         ],
       ),
       child: Text(
-        'ComicsApp',
+        'Comics Store',
         style: TextStyle(
           color: Theme.of(context).textTheme.headline6?.color,
           fontSize: 40,
           fontFamily: 'Anton',
-          fontWeight: FontWeight.normal,
+          fontWeight: FontWeight.bold,
         ),
       ),
     );

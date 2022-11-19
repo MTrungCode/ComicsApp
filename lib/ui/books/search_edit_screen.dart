@@ -1,17 +1,47 @@
-import '../../screen.dart';
 import 'package:flutter/material.dart';
-import '../../models/book.dart';
 import 'package:provider/provider.dart';
 
-class UserBookListTile extends StatelessWidget {
-  final Book book;
-  const UserBookListTile(
+import '../../models/book.dart';
+import '../../screen.dart';
+import '../../seach_edit_book.dart';
+
+class BookManagerScreen extends StatelessWidget {
+  static const routeName = '/book-manager-screen';
+  const BookManagerScreen(
     this.book, {
     super.key,
   });
 
+  final Book book;
+
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(book.title),
+        actions: [
+          IconButton(
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: SearchEditBook(),
+              );
+            },
+            icon: const Icon(Icons.search),
+          )
+        ],
+      ),
+      body: Container(
+        margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+        child: RefreshIndicator(
+          onRefresh: () async => print('Làm mới'),
+          child: searchManagerEditBook(context),
+        ),
+      ),
+    );
+  }
+
+  Widget searchManagerEditBook(BuildContext context) {
     return SizedBox(
       width: 240,
       height: 230,
@@ -20,7 +50,7 @@ class UserBookListTile extends StatelessWidget {
           children: [
             Container(
               margin: const EdgeInsets.only(top: 10),
-              width: 150,
+              width: 180,
               height: 170,
               child: Image.network(book.imageUrl),
             ),
