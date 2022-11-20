@@ -176,7 +176,7 @@ class _AuthCardState extends State<AuthCard> {
       validator: _authMode == AuthMode.signup
           ? (value) {
               if (value != _passwordController.text) {
-                return 'Passwords do not match!';
+                return 'Vui lòng nhập lại mật khẩu!';
               }
               return null;
             }
@@ -194,7 +194,7 @@ class _AuthCardState extends State<AuthCard> {
       controller: _passwordController,
       validator: (value) {
         if (value == null || value.length < 5) {
-          return 'Password is too short!';
+          return 'Mật khẩu phải > 5 ký tự!';
         }
         return null;
       },
@@ -213,7 +213,7 @@ class _AuthCardState extends State<AuthCard> {
       keyboardType: TextInputType.emailAddress,
       validator: (value) {
         if (value!.isEmpty || !value.contains('@')) {
-          return 'Invalid email!';
+          return 'Email không hợp lệ!';
         }
         return null;
       },

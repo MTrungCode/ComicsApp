@@ -9,15 +9,15 @@ class HttpException implements Exception {
   static String _translateFirebaseErrorCode(code) {
     switch (code) {
       case 'EMAIL_EXISTS':
-        return 'This email address is already in use';
+        return 'Địa chỉ email đã được sử dụng';
       case 'INVALID_EMAIL':
-        return 'This is not a valid email address';
+        return 'Địa chỉ email không hợp lệ';
       case 'WEAK_PASSWORD':
-        return 'This password is too weak';
+        return 'Mật khẩu quá ngắn';
       case 'EMAIL_NOT_FOUND':
-        return 'Could not find a user with that email';
+        return 'Email không tồn tại';
       case 'INVALID_PASSWORD':
-        return 'Invalid password';
+        return 'Mật khẩu không hợp lệ';
       default:
         return code;
     }

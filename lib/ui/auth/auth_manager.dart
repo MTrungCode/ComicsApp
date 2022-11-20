@@ -17,7 +17,7 @@ class AuthManager with ChangeNotifier {
 
   bool get isAdmin {
     return authToken != null &&
-        authToken!.userId == "4NBzVbU2JSO8CxrXGEWA8PKHx5F3";
+        authToken!.userId == "IAQsaU7HeLWq2NP2Me3AnRuClAG2";
   }
 
   AuthToken? get authToken {

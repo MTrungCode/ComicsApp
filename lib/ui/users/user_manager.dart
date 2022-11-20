@@ -1,30 +1,32 @@
 import '../../models/user.dart';
 
-class UserManager {
-  final List<User> _users = [
+import 'package:flutter/foundation.dart';
+class UserManager with ChangeNotifier{
+   List<User> _users = [
     User(
       id: 'u1',
-      name: 'Jon',
-      sex: 'male',
+      name: 'Tonny Nguyễn',
+      sex: 'nam',
       birthday: "1/1/2001",
-      address: "Kan Thor",
-      imageUrl:
-          'https://toigingiuvedep.vn/wp-content/uploads/2021/05/hinh-anh-avatar-nam-dep-trai-lanh-lung.jpg',
-    ),
-    User(
-      id: 'u2',
-      name: 'Wendy',
-      sex: 'female',
-      birthday: "13/2/2001",
-      address: "Kan Thor",
-      imageUrl:
-          'https://demoda.vn/wp-content/uploads/2022/03/anh-avatar-nu-mu-den.jpg',
+      address: "Cần Thơ",
     ),
   ];
-
-  int get userCount {
-    return _users.length;
+  void addNewInfo(User user) {
+    _users.add(
+      user.copyWith(
+        id: 'p${DateTime.now().toIso8601String()}',
+      ),
+    );
+    notifyListeners();
   }
+  void updateInfo(User user) {
+    final index = _users.indexWhere((element) => element.id == user.id);
+    if(index >= 0) {
+      _users[index] = user;
+      notifyListeners();
+    }
+  }
+
 
   List<User> get users {
     return [..._users];

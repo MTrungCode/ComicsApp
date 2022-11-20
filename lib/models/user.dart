@@ -1,18 +1,16 @@
 class User {
-  final String id;
+  final String? id;
   final String name;
   final String sex;
   final String birthday;
   final String address;
-  final String imageUrl;
-
+  
   User({
     required this.id,
     required this.name,
     required this.sex,
     required this.birthday,
     required this.address,
-    required this.imageUrl,
   });
 
   User copyWith({
@@ -21,7 +19,7 @@ class User {
     String? sex,
     String? birthday,
     String? address,
-    String? imageUrl,
+    String,
   }) {
     return User(
       id: id ?? this.id,
@@ -29,7 +27,26 @@ class User {
       sex: sex ?? this.sex,
       birthday: birthday ?? this.birthday,
       address: address ?? this.address,
-      imageUrl: imageUrl ?? this.imageUrl,
     );
   }
+  
+  // Map<String, dynamic> toJson() {
+  //   return {
+  //     'name': name,
+  //     'sex': sex,
+  //     'birthday': birthday,
+  //     'address': address,
+  
+  //   };
+  // }
+
+  // static User fromJson(Map<String, dynamic> json) {
+  //   return User(
+  //     id: json['id'],
+  //     name: json['name'],
+  //     sex: json['sex'],
+  //     birthday: json['birthday'],
+  //     address: json['address'],
+  //   );
+  // }
 }

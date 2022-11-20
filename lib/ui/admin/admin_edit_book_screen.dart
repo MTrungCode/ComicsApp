@@ -70,7 +70,7 @@ class _EditBookScreenState extends State<EditBookScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Chỉnh sửa thông tin sách'),
+        title: const Text('Chỉnh sửa thông tin truyện'),
       ),
       body: _isLoading
           ? const Center(

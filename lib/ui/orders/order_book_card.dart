@@ -34,7 +34,7 @@ class _OrderBookCardState extends State<OrderBookCart> {
   Widget buildOrderDetails() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
-      height: min(widget.order.bookCount * 40.0 + 10, 100),
+      height: min(widget.order.bookCount * 40.0 + 50, 130),
       child: ListView(
         children: widget.order.books
             .map((prod) => Row(

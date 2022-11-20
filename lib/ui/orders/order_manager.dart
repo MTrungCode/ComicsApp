@@ -4,14 +4,6 @@ import '../../models/cart_book.dart';
 import '../../models/order_book.dart';
 class OrdersManager with ChangeNotifier {
   List<OrderBook> _orders = [
-    OrderBook(
-      id: 'p1',
-      amount: 4200000,
-      books: [
-        CartBook(id: 'b1', title: 'One Piece', quality: 2, price: 2100000, imageUrl: 'https://i.truyenvua.xyz/ebook/190x247/dao-hai-tac_1552224567.jpg?gf=hdfgdfg&mobile=2'),
-      ],
-      dateTime: DateTime.now(),
-    )
   ];
 
   int get orderCount {

@@ -57,12 +57,12 @@ class _AppDrawerState extends State<AppDrawer> {
                   },
                 )
               : const Divider(),
-          ListTile(
-            title: const Text('Đăng ký'),
-            onTap: () {
-              Navigator.of(context).pushReplacementNamed('/signup');
-            },
-          ),
+          // ListTile(
+          //   title: const Text('Đăng ký'),
+          //   onTap: () {
+          //     Navigator.of(context).pushReplacementNamed('/signup');
+          //   },
+          // ),
           ListTile(
             title: const Text('Đăng xuất'),
             onTap: () {

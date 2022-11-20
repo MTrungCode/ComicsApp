@@ -1,10 +1,11 @@
+import 'package:comicsapp/ui/users/user_edit_info.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'screen.dart';
 // import 'ui/cart/cart_manager.dart';
 import 'ui/orders/order_manager.dart';
-
+import 'ui/users/user_manager.dart';
 Future<void> main() async {
   await dotenv.load();
   runApp(const ComicsApp());
@@ -131,13 +132,13 @@ class _ComicsAppState extends State<ComicsApp> {
                 },
               );
             }
-            if (settings.name == EditBookScreen.routeName) {
-              final bookId = settings.arguments as String?;
+            if (settings.name == UserEditInfoScreen.routeName) {
+              final userId = settings.arguments as String?;
               return MaterialPageRoute(
                 builder: (contx) {
-                  return EditBookScreen(
-                    bookId != null
-                        ? contx.read<BookManager>().findById(bookId)
+                  return UserEditInfoScreen(
+                    userId != null
+                        ? contx.read<UserManager>().findById(userId)
                         : null,
                   );
                 },
