@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-class ProfilePic extends StatelessWidget {
-  const ProfilePic({
+class UserProfile extends StatelessWidget {
+  const UserProfile({
     Key? key,
   }) : super(key: key);
 

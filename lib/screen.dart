@@ -24,4 +24,4 @@ export 'ui/auth/auth_screen.dart';
 export 'ui/admin/admin_book_screen.dart';
 export 'ui/admin/admin_edit_book_screen.dart';
 
-export 'ui/users/user_edit_info.dart';
+export 'ui/users/user_edit_info_screen.dart';

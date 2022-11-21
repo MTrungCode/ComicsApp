@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -5,9 +6,9 @@ import '../../models/book.dart';
 import '../../screen.dart';
 import '../../seach_edit_book.dart';
 
-class BookManagerScreen extends StatelessWidget {
+class SearchEditScreen extends StatelessWidget {
   static const routeName = '/book-manager-screen';
-  const BookManagerScreen(
+  const SearchEditScreen(
     this.book, {
     super.key,
   });

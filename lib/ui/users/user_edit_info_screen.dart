@@ -8,11 +8,11 @@ class UserEditInfoScreen extends StatefulWidget {
   static const routeName = '/edit-user';
 
     UserEditInfoScreen(
-      User? product, {
+      User? user, {
         super.key,
     }) {
-      if (product == null) {
-        this.product = User(
+      if (user == null) {
+        this.user = User(
           id: null,
           name: '',
           address: '',
@@ -20,21 +20,28 @@ class UserEditInfoScreen extends StatefulWidget {
           sex: '',
         );
       } else {
-    this.product = product;
+    this.user = user;
     }
   }
-  late final User product;
+  late final User user;
 
   @override
-    State<UserEditInfoScreen> createState() => _EditProductScreenState();
+    State<UserEditInfoScreen> createState() => _EditUserScreenState();
 }
 
-class _EditProductScreenState extends State<UserEditInfoScreen> {
+class _EditUserScreenState extends State<UserEditInfoScreen> {
 
   final _editForm = GlobalKey<FormState>();
-  late User _editedProduct;
+  late User _editedUser;
   var _isLoading = false;
 
+  @override
+  void initState() {
+
+    _editedUser = widget.user;
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +51,7 @@ class _EditProductScreenState extends State<UserEditInfoScreen> {
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.save),
+            color: Color.fromARGB(255, 23, 106, 174),
             onPressed: _saveForm,
           ),
         ],
@@ -58,10 +66,32 @@ class _EditProductScreenState extends State<UserEditInfoScreen> {
             key: _editForm,
             child: ListView(
               children: <Widget>[
-                buildNameField(),
-                buildSexField(),
-                buildBirthdayField(),
-                buildAddressField(),
+                SizedBox(
+                  width: 250,
+                  height: 500,
+                  child: Card(
+                    child: Column(                     
+                      children: [
+                        Container(
+                          margin: EdgeInsets.fromLTRB(20, 40,20,10),
+                          child: buildNameField(),
+                        ),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(20, 30,20,10),
+                          child: buildSexField(),
+                        ),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(20, 30,20,10),
+                          child: buildBirthdayField(),
+                        ),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(20, 30,20,10),
+                          child: buildAddressField(),
+                        ),
+                      ],
+                    ),
+                )
+                )
               ],
             ),
           ),
@@ -71,8 +101,9 @@ class _EditProductScreenState extends State<UserEditInfoScreen> {
  
   TextFormField buildNameField() {
     return TextFormField(
-      initialValue: _editedProduct.name,
-      decoration: const InputDecoration(labelText: 'Tên'),
+      initialValue: _editedUser.name,
+      decoration: const InputDecoration(labelText: 'Tên',
+      border: OutlineInputBorder()),
       textInputAction: TextInputAction.next,
       autofocus: true,
       validator: (value) {
@@ -82,15 +113,16 @@ class _EditProductScreenState extends State<UserEditInfoScreen> {
         return null;
       },
       onSaved: (value) {
-        _editedProduct = _editedProduct.copyWith(name: value);
+        _editedUser = _editedUser.copyWith(name: value);
       },
     );
   }
 
   TextFormField buildSexField() {
     return TextFormField(
-      initialValue: _editedProduct.sex,
-      decoration: const InputDecoration(labelText: 'Giới tính'),
+      initialValue: _editedUser.sex,
+      decoration: const InputDecoration(labelText: 'Giới tính',
+      border: OutlineInputBorder()),
       textInputAction: TextInputAction.next,
       validator: (value) {
         if (value!.isEmpty) {
@@ -102,16 +134,17 @@ class _EditProductScreenState extends State<UserEditInfoScreen> {
         return null;
       },
       onSaved: (value) {
-        _editedProduct = _editedProduct.copyWith(sex: value);
+        _editedUser = _editedUser.copyWith(sex: value);
       },
     );
   }
 
   TextFormField buildBirthdayField() {
     return TextFormField(
-      initialValue: _editedProduct.birthday,
-      decoration: const InputDecoration(labelText: 'Ngày sinh'),
-      maxLines: 3,
+      initialValue: _editedUser.birthday,
+      decoration: const InputDecoration(labelText: 'Ngày sinh',
+      border: OutlineInputBorder()),
+      maxLines: 1,
       keyboardType: TextInputType.multiline,
       validator: (value) {
         if (value!.isEmpty) {
@@ -123,15 +156,16 @@ class _EditProductScreenState extends State<UserEditInfoScreen> {
         return null;
       },
       onSaved: (value) {
-        _editedProduct = _editedProduct.copyWith(birthday: value);
+        _editedUser = _editedUser.copyWith(birthday: value);
       },
     );
   }
 
   TextFormField buildAddressField() {
     return TextFormField(
-      initialValue: _editedProduct.address,
-      decoration: const InputDecoration(labelText: 'Địa chỉ'),
+      initialValue: _editedUser.address,
+      decoration: const InputDecoration(labelText: 'Địa chỉ',
+      border: OutlineInputBorder()),
       maxLines: 2,
       keyboardType: TextInputType.multiline,
       validator: (value) {
@@ -144,7 +178,7 @@ class _EditProductScreenState extends State<UserEditInfoScreen> {
         return null;
       },
       onSaved: (value) {
-        _editedProduct = _editedProduct.copyWith(address: value);
+        _editedUser = _editedUser.copyWith(address: value);
       },
     );
   }
@@ -163,11 +197,11 @@ class _EditProductScreenState extends State<UserEditInfoScreen> {
   });
 
   try {
-    final productsManager = context.read<UserManager>();
-    if (_editedProduct.id != null) {
-       productsManager.updateInfo(_editedProduct);
+    final usersManager = context.read<UserManager>();
+    if (_editedUser.id != null) {
+       usersManager.updateInfo(_editedUser);
   } else {
-      productsManager.addNewInfo(_editedProduct);
+      usersManager.addNewInfo(_editedUser);
   }
   } catch (error) {
       await showErrorDialog(context, 'Có lỗi xảy ra .');

@@ -144,11 +144,11 @@ class _ComicsAppState extends State<ComicsApp> {
                 },
               );
             }
-            if (settings.name == BookManagerScreen.routeName) {
+            if (settings.name == SearchEditScreen.routeName) {
               final bookId = settings.arguments as String;
               return MaterialPageRoute(
                 builder: (contx) {
-                  return BookManagerScreen(
+                  return SearchEditScreen(
                     contx.read<BookManager>().findById(bookId),
                   );
                 },

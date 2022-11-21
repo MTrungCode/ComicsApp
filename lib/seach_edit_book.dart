@@ -64,16 +64,8 @@ class SearchEditBook extends SearchDelegate {
                   ),
                   title: Text(bookSuggest.title),
                   onTap: () {
-                    // Navigator.of(context).pushNamed(
-                    //   BookDetailScreen.routeName,
-                    //   arguments: bookSuggest.id,
-                    // );
-                    // Navigator.of(context).pushReplacementNamed(
-                    //   BookDetailScreen.routeName,
-                    //   arguments: bookSuggest.id,
-                    // );
                     Navigator.of(context).pushReplacementNamed(
-                      BookManagerScreen.routeName,
+                      SearchEditScreen.routeName,
                       arguments: bookSuggest.id,
                     );
                   },
