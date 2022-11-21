@@ -4,7 +4,7 @@ class User {
   final String sex;
   final String birthday;
   final String address;
-  
+
   User({
     required this.id,
     required this.name,
@@ -19,7 +19,6 @@ class User {
     String? sex,
     String? birthday,
     String? address,
-    String,
   }) {
     return User(
       id: id ?? this.id,
@@ -29,14 +28,14 @@ class User {
       address: address ?? this.address,
     );
   }
-  
+
   // Map<String, dynamic> toJson() {
   //   return {
   //     'name': name,
   //     'sex': sex,
   //     'birthday': birthday,
   //     'address': address,
-  
+
   //   };
   // }
 

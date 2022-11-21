@@ -23,103 +23,157 @@ class BookDetailScreen extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            const SizedBox(height: 10),
-            SizedBox(
-                height: 300,
-                width: 200,
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 5,
-                      color: const Color.fromARGB(255, 194, 197, 194),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: <Widget>[
+              const SizedBox(height: 10),
+              SizedBox(
+                  height: 300,
+                  width: 200,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        width: 5,
+                        color: const Color.fromARGB(255, 194, 197, 194),
+                      ),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(8),
+                      ),
                     ),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(8),
+                    child: Image.network(
+                      book.imageUrl,
+                      fit: BoxFit.contain,
                     ),
-                  ),
-                  child: Image.network(
-                    book.imageUrl,
-                    fit: BoxFit.contain,
-                  ),
-                )),
-            const SizedBox(height: 10),
-            Text(
-              'Tên: ${book.title}',
-              style: const TextStyle(fontSize: 14),
-            ),
-            Text(
-              'Thê loại: ${book.type}',
-              style: const TextStyle(fontSize: 14),
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 15),
-              child: Text(
-                'Nội dung: ${book.description}',
-                softWrap: true,
-                style: const TextStyle(fontSize: 14),
-              ),
-            ),
-            Text(
-              'Giá bán: ${book.price} đ',
-              style: const TextStyle(fontSize: 14),
-            ),
-            const SizedBox(height: 10),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 14),
-              width: double.infinity,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(4),
-                    child: Stack(
-                      children: <Widget>[
-                        Positioned.fill(
-                          child: Container(
-                            decoration: const BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: <Color>[
-                                  Color(0xFF0D47A1),
-                                  Color(0xFF0D47A1),
-                                  Color(0xFF0D47A1),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        buildAddCartButton(context),
-                      ],
+                  )),
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  const Text(
+                    'Tên: ',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 7),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(4),
-                    child: Stack(
-                      children: <Widget>[
-                        Positioned.fill(
-                          child: Container(
-                            decoration: const BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: <Color>[
-                                  Color.fromARGB(255, 18, 188, 95),
-                                  Color.fromARGB(255, 22, 151, 80),
-                                  Color.fromARGB(255, 51, 174, 106),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        buildBuyNow(context),
-                      ],
+                  Text(
+                    book.title,
+                    style: const TextStyle(
+                      fontSize: 14,
                     ),
                   ),
-                  const SizedBox(height: 10),
                 ],
               ),
-            ),
-          ],
+              Row(
+                children: [
+                  const Text(
+                    'Thể loại: ',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    book.type,
+                    style: const TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Nội dung: ',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Text(
+                      book.description,
+                      style: const TextStyle(fontSize: 14),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  const Text(
+                    'Giá bán: ',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    '${book.price} đ',
+                    style: const TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 14),
+                width: double.infinity,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(4),
+                      child: Stack(
+                        children: <Widget>[
+                          Positioned.fill(
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: <Color>[
+                                    Color(0xFF0D47A1),
+                                    Color(0xFF0D47A1),
+                                    Color(0xFF0D47A1),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          buildAddCartButton(context),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 7),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(4),
+                      child: Stack(
+                        children: <Widget>[
+                          Positioned.fill(
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: <Color>[
+                                    Color.fromARGB(255, 18, 188, 95),
+                                    Color.fromARGB(255, 22, 151, 80),
+                                    Color.fromARGB(255, 51, 174, 106),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          buildBuyNow(context),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

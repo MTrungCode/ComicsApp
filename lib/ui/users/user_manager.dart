@@ -1,8 +1,9 @@
 import '../../models/user.dart';
 
 import 'package:flutter/foundation.dart';
-class UserManager with ChangeNotifier{
-   List<User> _users = [
+
+class UserManager with ChangeNotifier {
+  final List<User> _users = [
     User(
       id: 'u1',
       name: 'Tonny Nguyễn',
@@ -19,14 +20,14 @@ class UserManager with ChangeNotifier{
     );
     notifyListeners();
   }
+
   void updateInfo(User user) {
     final index = _users.indexWhere((element) => element.id == user.id);
-    if(index >= 0) {
+    if (index >= 0) {
       _users[index] = user;
       notifyListeners();
     }
   }
-
 
   List<User> get users {
     return [..._users];

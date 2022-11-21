@@ -1,11 +1,11 @@
-import 'package:comicsapp/ui/users/user_edit_info.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 import 'screen.dart';
-// import 'ui/cart/cart_manager.dart';
 import 'ui/orders/order_manager.dart';
 import 'ui/users/user_manager.dart';
+
 Future<void> main() async {
   await dotenv.load();
   runApp(const ComicsApp());
