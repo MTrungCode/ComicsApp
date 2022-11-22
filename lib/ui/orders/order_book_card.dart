@@ -55,7 +55,7 @@ class _OrderBookCardState extends State<OrderBookCart> {
                       ],
                     ),
                     Text(
-                      ' Số lượng: ${prod.quality} \n Giá tiền: \$${prod.price}',
+                      ' Số lượng: ${prod.quality} \n Giá tiền: ${prod.price} đồng',
                       style: const TextStyle(
                         fontSize: 16,
                         color: Colors.black,
@@ -71,7 +71,7 @@ class _OrderBookCardState extends State<OrderBookCart> {
   Widget buildOrderSummary(OrdersManager orders, BuildContext context) {
     return ListTile(
       title: Text(
-        'Tổng tiền: \$${widget.order.amount}',
+        'Tổng tiền: ${widget.order.amount} đồng',
         style: const TextStyle(
           fontSize: 18,
           color: Color.fromARGB(255, 82, 33, 243),

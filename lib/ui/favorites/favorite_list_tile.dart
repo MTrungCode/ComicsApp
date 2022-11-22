@@ -42,6 +42,15 @@ class FavoriteListTile extends StatelessWidget {
           onSelected: (value) {
             if (value == 2) {
               context.read<BookManager>().favoriteStatus(favoriteBook);
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(const SnackBar(
+                  content: Text(
+                    'Đã xoá một sản phẩm yêu thích',
+                  ),
+                  duration: Duration(seconds: 2),
+                  backgroundColor: Color.fromARGB(255, 49, 172, 19),
+                ));
             } else if (value == 3) {
               ScaffoldMessenger.of(context)
                 ..hideCurrentSnackBar()

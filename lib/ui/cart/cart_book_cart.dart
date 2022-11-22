@@ -58,7 +58,7 @@ class CartBookCart extends StatelessWidget {
             backgroundImage: NetworkImage(cardBook.imageUrl),
           ),
           title: Text(cardBook.title),
-          subtitle: Text('Tổng: \$${(cardBook.price * cardBook.quality)}'),
+          subtitle: Text('Tổng: ${(cardBook.price * cardBook.quality)} đồng'),
           trailing: Text('Số lượng: ${cardBook.quality}'),
         ),
       ),
